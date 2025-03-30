@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO.NET", "ADO.NET\ADO.NET.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovesConnector", "MovesConnector\MovesConnector.csproj", "{3D3144D5-D92B-49FC-9F1D-7396E956306E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesForms", "MoviesForms\MoviesForms.csproj", "{8407E50A-0824-4578-8F18-1165909A5BF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3D3144D5-D92B-49FC-9F1D-7396E956306E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3144D5-D92B-49FC-9F1D-7396E956306E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3144D5-D92B-49FC-9F1D-7396E956306E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8407E50A-0824-4578-8F18-1165909A5BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8407E50A-0824-4578-8F18-1165909A5BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8407E50A-0824-4578-8F18-1165909A5BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8407E50A-0824-4578-8F18-1165909A5BF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

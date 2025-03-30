@@ -10,19 +10,27 @@ namespace MovesConnector
     {
         static void Main(string[] args)
         {
-            const string CONNECTION_STRING = "Data Source=(localdb)\\MSSQLLocalDB;" +
-                "Initial Catalog=Movies_311;" +
-                "Integrated Security=True;" +
-                "Connect Timeout=30;" +
-                "Encrypt=False;" +
-                "TrustServerCertificate = False;" +
-                "ApplicationIntent=ReadWrite;" +
-                "MultiSubnetFailover=False";
-            Connector connector = new Connector(CONNECTION_STRING);
+            //const string CONNECTION_STRING = "Data Source=(localdb)\\MSSQLLocalDB;" +
+            //    "Initial Catalog=Movies_311;" +
+            //    "Integrated Security=True;" +
+            //    "Connect Timeout=30;" +
+            //    "Encrypt=False;" +
+            //    "TrustServerCertificate = False;" +
+            //    "ApplicationIntent=ReadWrite;" +
+            //    "MultiSubnetFailover=False";
+            //Connector connector = new Connector(CONNECTION_STRING);
 
-            connector.Select("SELECT * FROM Directors");
-            connector.Select("SELECT * FROM Movies");
+            Connector connector = new Connector();
 
+            //connector.Select("SELECT * FROM Directors");
+            //connector.Select("SELECT * FROM Movies");
+            connector.InsertDirector("Louis", "Letterier");
+            connector.Select("*", "Directors");
+            connector.Select(
+                "title, release_date,FORMATMESSAGE(N'%s %s', first_name, last_name) AS director", 
+                "Movies,Directors",
+                "director=director_id"
+                );
         }
     }
 }
