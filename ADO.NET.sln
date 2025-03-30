@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovesConnector", "MovesConn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesForms", "MoviesForms\MoviesForms.csproj", "{8407E50A-0824-4578-8F18-1165909A5BF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{281C5971-8EE0-443F-9F9F-CF24F18FB558}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8407E50A-0824-4578-8F18-1165909A5BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8407E50A-0824-4578-8F18-1165909A5BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8407E50A-0824-4578-8F18-1165909A5BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281C5971-8EE0-443F-9F9F-CF24F18FB558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281C5971-8EE0-443F-9F9F-CF24F18FB558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281C5971-8EE0-443F-9F9F-CF24F18FB558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281C5971-8EE0-443F-9F9F-CF24F18FB558}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

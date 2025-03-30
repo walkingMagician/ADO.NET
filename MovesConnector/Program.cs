@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace MovesConnector
 {
@@ -20,7 +21,8 @@ namespace MovesConnector
             //    "MultiSubnetFailover=False";
             //Connector connector = new Connector(CONNECTION_STRING);
 
-            Connector connector = new Connector();
+            Connector connector = new Connector(ConfigurationManager.ConnectionStrings["Movies_311"].ConnectionString);
+            //Connector connector = new Connector();
 
             //connector.Select("SELECT * FROM Directors");
             //connector.Select("SELECT * FROM Movies");
@@ -31,6 +33,10 @@ namespace MovesConnector
                 "Movies,Directors",
                 "director=director_id"
                 );
+
+            Console.WriteLine("\n----------------------------------------\n");
+            Connector connect = new Connector(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
+            connect.Select("*", "Disciplines");
         }
     }
 }
