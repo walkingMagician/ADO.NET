@@ -12,12 +12,14 @@ using System.Runtime.InteropServices;
 using System.Configuration;
 using System.Data.SqlClient;
 
+using CacheLibrary;
+
 namespace AcademyDataSet
 {
     public partial class MainForm : Form
     {
         Cache cache;
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -34,6 +36,14 @@ namespace AcademyDataSet
             cache.print("Groups");
             //LoadGroupsRelatedData();
 
+
+            cbDirection.DataSource = cache.Set.Tables["Directions"];
+            cbDirection.ValueMember = "direction_id";
+            cbDirection.DisplayMember = "direction_name";
+
+            cbGroup.DataSource = cache.Set.Tables["Groups"];
+            cbGroup.ValueMember = "group_id";
+            cbGroup.DisplayMember = "group_name";
         }
 
         
@@ -43,5 +53,13 @@ namespace AcademyDataSet
         
         [DllImport("kernel32.dll")]
         public static extern bool FreeConsole();
+
+        private void cbDirection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            object selectedValue = (sender as ComboBox).SelectedValue;
+            string filter = $"direction = {selectedValue.ToString()}";
+            Console.WriteLine(filter);
+            cache.Set.Tables["Groups"].DefaultView.RowFilter = filter;
+        }
     }
 }
