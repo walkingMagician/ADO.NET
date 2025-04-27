@@ -4,22 +4,85 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
+using ConnectorLibrary;
+
 namespace CacheLibrary
 {
     public class Cache
     {
-        readonly string CONNECTION_STRING = "";
-        SqlConnection connection = null;
         DataSet set = null;
         public DataSet Set { get => this.set; }
+        Connector _connector;
+
+        private readonly System.Timers.Timer _timer;
+        private bool _timer_check = false;
 
         public Cache(string connectionString)
         {
-
-            CONNECTION_STRING = connectionString;
-            connection = new SqlConnection(CONNECTION_STRING);
+            _connector = new Connector(connectionString);
             set = new DataSet();
-            Console.WriteLine(CONNECTION_STRING);
+
+            // время таймер //
+            _timer = new System.Timers.Timer(3000); // 5мин
+            _timer.Elapsed += TimerUpdate;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
+
+        }
+
+        private void TimerUpdate(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_timer_check) return;
+
+            try
+            {
+                _timer_check = true;
+                Console.WriteLine("Обновление БД " + DateTime.Now);
+                
+                foreach (DataTable table in set.Tables)
+                {
+                    if(HasParents(table.TableName))
+                        _connector.RefreshTableConnector(set, table.TableName);
+                }
+
+                Console.WriteLine("БД обновлена " + DateTime.Now);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка обновления БД " + ex.Message);
+            }
+            finally 
+            { 
+                _timer_check = false; 
+            }
+        }
+
+        public void AddTable(string tableName, string columns)
+        {
+            _connector.AddTableConnector(set, tableName, columns);
+            print(tableName);
+        }
+
+        public void AddRelation(string relation_name, string child, string parents)
+        {
+            _connector.AddRelationConnector(set, relation_name, child, parents);
+        }
+        public void Dispose()
+        { 
+            _timer?.Dispose();
+            _connector?.Dispose();
+        }
+
+        /*private void RefreshTable(string tableName)
+        {
+            if (!set.Tables.Contains(tableName)) return;
+            DataTable dt = set.Tables[tableName];
+            string columns = string.Join(",", dt.Columns.Cast<DataColumn>().Select(c => c.ColumnName));
+            dt.Rows.Clear();
+            string cmd = $"SELECT {columns} FROM {tableName}";
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd, connection);
+            adapter.Fill(dt);
         }
 
         public void AddTable(string table, string columns)
@@ -53,7 +116,7 @@ namespace CacheLibrary
                     set.Tables[parent.Split(',')[0]].Columns[parent.Split(',')[1]],
                     set.Tables[child.Split(',')[0]].Columns[child.Split(',')[1]]
                 );
-        }
+        }*/
 
         //void LoadGroupsRelatedData()
         //{

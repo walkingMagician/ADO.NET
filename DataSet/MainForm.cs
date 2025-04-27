@@ -19,6 +19,7 @@ namespace AcademyDataSet
     public partial class MainForm : Form
     {
         Cache cache;
+        //Connector connector;
         
         public MainForm()
         {
@@ -27,6 +28,8 @@ namespace AcademyDataSet
 
             //1) создаём dataSet
             cache = new Cache(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
+            //connector = new Connector(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
+            
             //set = new DataSet("GroupsRelatedData");
             cache.AddTable("Directions", "direction_id,direction_name");
             cache.AddTable("Groups", "group_id,group_name,direction");

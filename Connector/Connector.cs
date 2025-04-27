@@ -1,30 +1,25 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 
 
 
-namespace AcademyDataSet
+namespace ConnectorLibrary
 {
-    internal class Connector
+    public class Connector
     {
         private readonly string _CONNECTION_STRING;
         private SqlConnection _connection;
 
         public Connector(string connectionString)
-        { 
+        {
             _CONNECTION_STRING = connectionString;
             _connection = new SqlConnection(_CONNECTION_STRING);
             Console.WriteLine(_CONNECTION_STRING);
         }
 
-        public void GetDataSet(DataSet set, string table, string columns)
+        public void AddTableConnector(DataSet set, string table, string columns)
         {
             //2.1) добавляем таблицу в dataset
             set.Tables.Add(table);
@@ -44,7 +39,7 @@ namespace AcademyDataSet
             adapter.Fill(set.Tables[table]);
         }
 
-        public void AddRelation(DataSet set, string relation_name, string child, string parent)
+        public void AddRelationConnector(DataSet set, string relation_name, string child, string parent)
         {
             set.Relations.Add
                 (
@@ -54,7 +49,7 @@ namespace AcademyDataSet
                 );
         }
 
-        private void RefreshTable(DataSet set, string tableName)
+        public void RefreshTableConnector(DataSet set, string tableName)
         {
             if (!set.Tables.Contains(tableName)) return;
             DataTable dt = set.Tables[tableName];
@@ -65,6 +60,9 @@ namespace AcademyDataSet
             adapter.Fill(dt);
         }
 
+        public void Dispose()
+        { 
+            _connection?.Dispose();
+        }
     }
 }
-*/
